@@ -1,24 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+
+import './css/App.css';
+import './css/bootstrap-icons.css';
+import './css/bootstrap.min.css';
+import './css/templatemo-kind-heart-charity.css';
+import Header from './Containers/header/header';
+import Menu from './Containers/header/menu';
+import Main from './Containers/main/main';
+import Footer from './Containers/footer/footer';
+import Home from './Containers/main/Pages/home';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header></Header>
+      <Menu></Menu>
+      <Main></Main>
+      <Home></Home>
+      <Footer></Footer>
+    </>
   );
 }
 
