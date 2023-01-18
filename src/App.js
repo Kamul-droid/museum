@@ -8,6 +8,7 @@ import Menu from './Containers/header/menu';
 import Main from './Containers/main/main';
 import Footer from './Containers/footer/footer';
 import Home from './Containers/main/Pages/home';
+import Card1 from './Containers/main/Pages/card1';
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
       <Header></Header>
       <Menu></Menu>
       <Main></Main>
-      <Home></Home>
+      <Card1></Card1>
+      {/* <Home></Home> */}
       <Footer></Footer>
     </>
   );

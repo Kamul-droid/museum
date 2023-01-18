@@ -1,0 +1,31 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+const Card = (props) => {
+    const {img, title, credit} = props;
+
+    return (
+        <div className="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
+            <div className="custom-block-wrap">
+                <img src={img} className="custom-block-image img-fluid" alt=""/>
+
+                <div className="custom-block">
+                    <div className="custom-block-body">
+                        <h5 className="mb-3">{title}</h5>
+
+                        <p>{credit}</p>
+
+                                                
+                    </div>
+
+                    <Link to="/" className="custom-btn btn">Details</Link>
+                </div>
+            </div>
+            <div id='test'>
+
+            </div>
+        </div>
+    );
+}
+
+export default Card;

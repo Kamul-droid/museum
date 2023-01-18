@@ -1,37 +1,33 @@
-import React, { Component } from 'react';
-// import { Link } from 'react-router-dom';
+import { data } from 'jquery';
+import React from 'react';
 import Card from './card';
-class Home extends Component {
-    constructor(props){
-        super(props)
-        this.artObjects = [];
-        this.IDs =[];
-        this.hasId = false;
-        this.requestOptions={
+const card1 = () => {
+
+    const artObjects = [];
+       let IDs=[];
+       let hasId = false;
+      let  requestOptions={
             method:'GET',
             redirect:'follow'
         };
-
-    }
-
-     // eslint-disable-next-line no-undef
-     getMuseumArtObjectIDsApi = () => {
+    // eslint-disable-next-line no-undef
+    let getMuseumArtObjectIDsApi = () => {
         // const searchValue = $(".search-box").val();
         
-            fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects`, this.requestOptions)
+            fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects`,requestOptions)
             .then(response => response.text())
             .then((result) => {
                 console.log(JSON.parse(result));
                 let data = JSON.parse(result);
-                this.IDs = data['objectIDs'];
-                if (this.IDs) {
+                IDs = data['objectIDs'];
+                if (IDs) {
                     console.log('ifs true');
-                    this.hasId = true;
+                    hasId = true;
                 }
-                if (this.hasId) {
-                    this.hasId =false;
-                    this.getMuseumArtObjectApi();
-                    console.log(this.artObjects);
+                if (hasId) {
+                    hasId =false;
+                    getMuseumArtObjectApi();
+                    console.log(artObjects,'mes objets');
                     
                 }
                
@@ -46,22 +42,24 @@ class Home extends Component {
 
 
     
-    getMuseumArtObjectApi =()=>{
+   let  getMuseumArtObjectApi =()=>{
 
-        console.log('ids',this.IDs);
-                let extract = this.IDs.slice(45734,45764);
+        console.log('ids',IDs);
+                let extract = IDs.slice(45734,45764);
                
 
                 if (extract !== null) {
                     extract.map(id => 
-                        fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`,this.requestOptions)
+                        fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`,requestOptions)
                         .then(response => response.text())
                         .then((result)=>{
                             // console.log(JSON.parse(result));
                             let object = JSON.parse(result);
                             // console.log(object,'object');
-                            this.artObjects.push(object);
-                        // console.log(this.artObjects,"tab");
+                        let show =  document.getElementById('test');
+                        show.innerHTML = <p>{ JSON.stringify( object)}</p>
+                            artObjects.push(object);
+                        // console.log(artObjects,"tab");
                         }).catch((error)=>{
                             console.log('error',error);
                         }).finally(()=>{
@@ -76,10 +74,10 @@ class Home extends Component {
                 return true;
     }
 
-    // getMuseumArtObjectIDsApi();
+    getMuseumArtObjectIDsApi();
     
 
-    render(){
+    
 
    
         return (
@@ -95,15 +93,23 @@ class Home extends Component {
                     {
                         
 
-                        this.hasId ?
-                        this.artObjects.map(data => 
-                            <Card img="u" title ="allo" credit=""></Card>
+                        hasId ?()=>
+                       { artObjects.map(data => 
 
-                        ) 
+                            <Card img={data["primaryImage"]} title ={data["title"]} credit={data["creditLine"]}></Card>
+
+                        );
+                        }
                     
                     : <p>No furniture to show</p>
-                    } 
 
+                    
+                    }
+                     
+
+
+                </div>
+                <div id='test'>
 
                 </div>
             </div>
@@ -111,7 +117,7 @@ class Home extends Component {
 
 
         );
-    }
+    
 };
 
-export default Home;
+export default card1;

@@ -14,15 +14,15 @@ const Footer = () => {
                         <h5 className="site-footer-title mb-3">Quick Links</h5>
 
                         <ul className="footer-menu">
-                            <li className="footer-menu-item"><Link to="#" className="footer-menu-link">Our Story</Link></li>
+                            <li className="footer-menu-item"><Link to="/" className="footer-menu-link">Our Story</Link></li>
 
-                            <li className="footer-menu-item"><Link to="#" className="footer-menu-link">Newsroom</Link></li>
+                            <li className="footer-menu-item"><Link to="/" className="footer-menu-link">Newsroom</Link></li>
 
-                            <li className="footer-menu-item"><Link to="#" className="footer-menu-link">Causes</Link></li>
+                            <li className="footer-menu-item"><Link to="/" className="footer-menu-link">Causes</Link></li>
 
-                            <li className="footer-menu-item"><Link to="#" className="footer-menu-link">Become a volunteer</Link></li>
+                            <li className="footer-menu-item"><Link to="/" className="footer-menu-link">Become a volunteer</Link></li>
 
-                            <li className="footer-menu-item"><Link to="#" className="footer-menu-link">Partner with us</Link></li>
+                            <li className="footer-menu-item"><Link to="/" className="footer-menu-link">Partner with us</Link></li>
                         </ul>
                     </div>
 
@@ -50,7 +50,7 @@ const Footer = () => {
                             The Metropolitan Museum of Art 20, 0150 Paris, France
                         </p>
 
-                        <Link to="#" className="custom-btn btn mt-3">Get Direction</Link>
+                        <Link to="/" className="custom-btn btn mt-3">Get Direction</Link>
                     </div>
                 </div>
             </div>
@@ -60,8 +60,8 @@ const Footer = () => {
                     <div className="row">
 
                         <div className="col-lg-6 col-md-7 col-12">
-                            <p className="copyright-text mb-0">Copyright © 2023 <Link to="#">Metropolitan Museum</Link> Gardian of Art.
-                        	Design: <Link to="#" target="_blank">
+                            <p className="copyright-text mb-0">Copyright © 2023 <Link to="/">Metropolitan Museum</Link> Gardian of Art.
+                        	Design: <Link to="/" target="_blank">
                                 Kamul
                             </Link></p>
                         </div>
@@ -69,19 +69,19 @@ const Footer = () => {
                         <div className="col-lg-6 col-md-5 col-12 d-flex justify-content-center align-items-center mx-auto">
                             <ul className="social-icon">
                                 <li className="social-icon-item">
-                                    <Link to="#" className="social-icon-link bi-twitter"></Link>
+                                    <Link to="/" className="social-icon-link bi-twitter"></Link>
                                 </li>
 
                                 <li className="social-icon-item">
-                                    <Link to="#" className="social-icon-link bi-facebook"></Link>
+                                    <Link to="/" className="social-icon-link bi-facebook"></Link>
                                 </li>
 
                                 <li className="social-icon-item">
-                                    <Link to="#" className="social-icon-link bi-instagram"></Link>
+                                    <Link to="/" className="social-icon-link bi-instagram"></Link>
                                 </li>
 
                                 <li className="social-icon-item">
-                                    <Link to="#" className="social-icon-link bi-linkedin"></Link>
+                                    <Link to="/" className="social-icon-link bi-linkedin"></Link>
                                 </li>
 
                                 

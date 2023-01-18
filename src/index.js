@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './css/App.css';
 import App from './App';
+import Advanced from './Containers/main/Pages/advancedSearch';
 import 'jquery';
 import 'bootstrap';
 import './css/js/jquery.sticky';
@@ -18,6 +19,7 @@ root.render(
     <BrowserRouter>
       <Routes>
       <Route path='/' element= {<App/>}/>
+      <Route path='/advanced_research' element= {<Advanced/>}/>
 
       {/* <App /> */}
       </Routes>
