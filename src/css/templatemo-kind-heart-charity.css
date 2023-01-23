@@ -223,6 +223,16 @@ strong {
   height: 100%;
   object-fit: cover;
 }
+.custom-block-image-waiting {
+  display: block;
+  width: 20%;
+  height: 20%;
+  margin: auto;
+  border-radius: 50%;
+  text-align: center;
+  align-items: center;
+  object-fit:contain;
+}
 
 .custom-block .custom-btn {
   border-radius: 0;
@@ -320,6 +330,7 @@ strong {
   font-weight: var(--font-weight-normal);
   line-height: normal;
   padding: 15px 25px;
+  margin-bottom: 5px;
 }
 
 .navbar-expand-lg .navbar-nav .nav-link.custom-btn {

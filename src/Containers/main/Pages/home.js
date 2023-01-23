@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 // import { Link } from 'react-router-dom';
 import Card from './card';
@@ -11,14 +12,18 @@ class Home extends Component {
             method:'GET',
             redirect:'follow'
         };
-
+        this.state ={
+            data:[]
+        }
+        
+    
     }
 
      // eslint-disable-next-line no-undef
-     getMuseumArtObjectIDsApi = () => {
+    getMuseumArtObjectIDsApi = async () => {
         // const searchValue = $(".search-box").val();
         
-            fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects`, this.requestOptions)
+           await  fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects`, this.requestOptions)
             .then(response => response.text())
             .then((result) => {
                 console.log(JSON.parse(result));
@@ -30,9 +35,11 @@ class Home extends Component {
                 }
                 if (this.hasId) {
                     this.hasId =false;
-                    this.getMuseumArtObjectApi();
+                   this.getMuseumArtObjectApi();
                     console.log(this.artObjects);
-                    
+                    this.setState({
+                        data: this.artObjects
+                    })
                 }
                
             })
@@ -46,7 +53,7 @@ class Home extends Component {
 
 
     
-    getMuseumArtObjectApi =()=>{
+     getMuseumArtObjectApi = async ()=>{
 
         console.log('ids',this.IDs);
                 let extract = this.IDs.slice(45734,45764);
@@ -62,9 +69,11 @@ class Home extends Component {
                             // console.log(object,'object');
                             this.artObjects.push(object);
                         // console.log(this.artObjects,"tab");
+                        
                         }).catch((error)=>{
                             console.log('error',error);
                         }).finally(()=>{
+                           
                             return true;
                         })
                     )
@@ -75,9 +84,13 @@ class Home extends Component {
                 // console.log(artObjects);
                 return true;
     }
-
-    // getMuseumArtObjectIDsApi();
+   
+    getData =()=>{
+        this.getMuseumArtObjectIDsApi();
+    }
     
+   
+   
 
     render(){
 
@@ -91,13 +104,15 @@ class Home extends Component {
                         <h2>Popular</h2>
                     </div>
                   
-                    
+                    { console.log('====================================')}
+                    {console.log(this.state.data)}
+                    { console.log('====================================')
+}
                     {
-                        
-
+                       
                         this.hasId ?
-                        this.artObjects.map(data => 
-                            <Card img="u" title ="allo" credit=""></Card>
+                        this.state.data.map(data => 
+                            <Card img={data["primaryImage"]} title ={data["title"]} credit={data["creditLine"]}></Card>
 
                         ) 
                     

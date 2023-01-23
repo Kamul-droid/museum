@@ -7,7 +7,7 @@ const Card = (props) => {
     return (
         <div className="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
             <div className="custom-block-wrap">
-                <img src={img} className="custom-block-image img-fluid" alt=""/>
+                <img src={img} className="custom-block-image img-fluid" alt="" width={150} height={150}  />
 
                 <div className="custom-block">
                     <div className="custom-block-body">
@@ -18,12 +18,10 @@ const Card = (props) => {
                                                 
                     </div>
 
-                    <Link to="/" className="custom-btn btn">Details</Link>
+                    <Link to="/details" className="custom-btn btn">Details</Link>
                 </div>
             </div>
-            <div id='test'>
-
-            </div>
+            
         </div>
     );
 }
