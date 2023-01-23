@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './css/App.css';
 import App from './App';
 import Advanced from './Containers/main/Pages/advancedSearch';
+import Description from './Containers/main/Pages/description';
 import 'jquery';
 import 'bootstrap';
 import './css/js/jquery.sticky';
@@ -20,7 +21,7 @@ root.render(
       <Routes>
       <Route path='/' element= {<App/>}/>
       <Route path='/advanced_research' element= {<Advanced/>}/>
-      <Route path='/details' element= {<Advanced/>}/>
+      <Route path='/details' element= {<Description/>}/>
 
       {/* <App /> */}
       </Routes>

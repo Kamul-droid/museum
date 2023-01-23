@@ -913,7 +913,7 @@ html {
     margin-bottom: 60px;
     box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
   }
-  
+  /* barrre de recherche */
   .s008 form .inner-form .basic-search .input-field {
     width: 100%;
     padding: 20px 40px 20px 40px;
@@ -1006,8 +1006,29 @@ html {
   
   .s008 form .inner-form .advance-search .input-select {
     height: 40px;
+    width: 20px;
+    ;
+
+
   }
-  
+.input-tag  {
+    
+    height: 25px;
+    width: 150px;
+margin-top: 10px;
+    margin-bottom: 30px;
+    margin-left: 25px;
+}
+.input-select-departmentId{
+    
+    height: 20px;
+    width: 200px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    margin-right: 25px;
+
+}
+
   .s008 form .inner-form .advance-search .choices__inner {
     background: transparent;
     border-radius: 0;

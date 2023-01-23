@@ -1,9 +1,9 @@
 import React from 'react';
 import Header from '../../header/header';
 import Menu from '../../header/menu';
-import Home from './home';
 import Footer from '../../footer/footer';
 import '../../../css/research.css'
+
 const AdvancedSearch = () => {
     return (
 
@@ -25,33 +25,39 @@ const AdvancedSearch = () => {
           <div class="advance-search">
             <span class="desc">Advanced Search</span>
             <div class="row">
-              <div class="input-field">
-                <div class="input-select">
+
+                <div class="input-select-departmentId">
                   <select data-trigger="" name="choices-single-defaul">
-                    <option placeholder="" value="">ACCESSORIES</option>
-                    <option>ACCESSORIES</option>
-                    <option>SUBJECT B</option>
-                    <option>SUBJECT C</option>
+                    <option placeholder="" value="">CATEGORY</option>
+                    <option>American Decorative Arts</option>
+                    <option>Ancient Near Eastern Art</option>
+                    <option>Arts of Africa/Oceania/Americas</option>
+                    <option>Asian Art</option>
+                    <option>The Cloisters</option>
+                    <option>The Costume Institute</option>
+                    <option>Drawings and Prints</option>
+                    <option>Egyptian Art</option>
+                    <option>European Sculpture/Decorative</option>
+                    <option>Greek and Roman Art</option>
+                    <option>Islamic Art</option>
+                    <option>The Robert Lehman Collection</option>
+                    <option>The Libraries</option>
+                    <option>Medieval Art</option>
+                    <option>Musical Instruments</option>
+                    <option>Photographs</option>
+                    <option>Modern Art</option>
                   </select>
-                </div>
-              </div>
+
+              </div>                   
+                    <input type="text" className="input-tag" placeholder="tag"/>
+
+                    
               <div class="input-field">
                 <div class="input-select">
                   <select data-trigger="" name="choices-single-defaul">
-                    <option placeholder="" value="">COLOR</option>
-                    <option>GREEN</option>
-                    <option>SUBJECT B</option>
-                    <option>SUBJECT C</option>
-                  </select>
-                </div>
-              </div>
-              <div class="input-field">
-                <div class="input-select">
-                  <select data-trigger="" name="choices-single-defaul">
-                    <option placeholder="" value="">SIZE</option>
-                    <option>SIZE</option>
-                    <option>SUBJECT B</option>
-                    <option>SUBJECT C</option>
+                    <option placeholder="" value="">Images</option>
+                    <option>True</option>
+                    <option>False</option>
                   </select>
                 </div>
               </div>
