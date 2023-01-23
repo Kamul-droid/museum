@@ -43,7 +43,7 @@ const Menu = () => {
                     
 
                     <li className="nav-item ms-3">
-                        <Link className="nav-link custom-btn custom-border-btn btn" to="donate.html">Advanced search</Link>
+                        <Link className="nav-link custom-btn custom-border-btn btn" to="/advanced_research">Advanced search</Link>
                     </li>
                 </ul>
             </div>
