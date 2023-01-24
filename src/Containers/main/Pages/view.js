@@ -19,6 +19,8 @@ const Views = () => {
     const [artObjects, setArtObjects] = useState([]);
     const [objectsId, setObjectsId] = useState([]);
     const [isLoaded, setLoaded] = useState(false);
+    const [search, setSearch] = useState("");
+
     let alldata = [];
     // eslint-disable-next-line no-undef
     const getMuseumArtObject =  () => {
