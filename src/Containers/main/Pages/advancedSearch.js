@@ -7,9 +7,9 @@ import '../../../css/research.css'
 const AdvancedSearch = () => {
     return (
 
-        <>
-            <Header></Header>
-            <Menu></Menu> 
+  <>
+    <Header></Header>
+    <Menu></Menu> 
     <html>
     <head>
     <link href="../../../css/research.css" rel="stylesheet" />
@@ -19,16 +19,15 @@ const AdvancedSearch = () => {
         <div class="inner-form">
           <div class="basic-search">
             <div class="input-field">
-              <input id="search" type="text" placeholder="Type Keywords" /> 
+              <input id="search" type="text" placeholder="Type Keywords" name='q' /> 
             </div>
           </div>
           <div class="advance-search">
-            <span class="desc">Advanced Search</span>
+            <span>Advanced Search</span>
             <div class="row">
-
                 <div class="input-select-departmentId">
-                  <select data-trigger="" name="choices-single-defaul">
-                    <option placeholder="" value="">CATEGORY</option>
+                  <select data-trigger="" name="departmentId">
+                    <option placeholder="" value="">Category</option>
                     <option>American Decorative Arts</option>
                     <option>Ancient Near Eastern Art</option>
                     <option>Arts of Africa/Oceania/Americas</option>
@@ -48,61 +47,36 @@ const AdvancedSearch = () => {
                     <option>Modern Art</option>
                   </select>
 
-              </div>                   
-                    <input type="text" className="input-tag" placeholder="tag"/>
-
-                    
-              <div class="input-field">
-                <div class="input-select">
-                  <select data-trigger="" name="choices-single-defaul">
-                    <option placeholder="" value="">Images</option>
+              </div>  
+              <div class="input-select-highlight">
+                <select data-trigger="" name="highlight">
+                    <option placeholder="" value="">highlight</option>
                     <option>True</option>
                     <option>False</option>
                   </select>
-                </div>
+                </div>                 
+
+                  <div class="input-field-hasImages">
+                  <select data-trigger="" name="hasImages">
+                    <option placeholder="" value="">Image</option>
+                    <option>True</option>
+                    <option>False</option>
+                  </select>
               </div>
             </div>
             <div class="row second">
-              <div class="input-field">
-                <div class="input-select">
-                  <select data-trigger="" name="choices-single-defaul">
-                    <option placeholder="" value="">SALE</option>
-                    <option>SALE</option>
-                    <option>SUBJECT B</option>
-                    <option>SUBJECT C</option>
-                  </select>
+            <div class="input-select-geoLocation">                  
+                    <input type="text" placeholder="géolocation(ex:Europe | Paris)" name='geoLocation'/>
+            </div>
+                <input type="text" className="input-tag" placeholder="tag" name='tags'/>
+            <div class="input-select-medium">                  
+                    <input type="text" placeholder="ex: Peintures | Céramique" name='medium'/>
                 </div>
-              </div>
-              <div class="input-field">
-                <div class="input-select">
-                  <select data-trigger="" name="choices-single-defaul">
-                    <option placeholder="" value="">TIME</option>
-                    <option>THIS WEEK</option>
-                    <option>SUBJECT B</option>
-                    <option>SUBJECT C</option>
-                  </select>
-                </div>
-              </div>
-              <div class="input-field">
-                <div class="input-select">
-                  <select data-trigger="" name="choices-single-defaul">
-                    <option placeholder="" value="">TYPE</option>
-                    <option>TYPE</option>
-                    <option>SUBJECT B</option>
-                    <option>SUBJECT C</option>
-                  </select>
-                </div>
-              </div>
+            
             </div>
             <div class="row third">
-              <div class="input-field">
-                <div class="result-count">
-                  <span>108 </span>results</div>
-                <div class="group-btn">
                   <button class="btn-delete" id="delete">Reset</button>
-                  <button class="btn-search">Search</button>
-                </div>
-              </div>
+                  <button class="btn-advanceSearch">Search</button>
             </div>
           </div>
         </div>
