@@ -1,119 +1,136 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, useCallback } from 'react';
 import {debounce} from 'lodash'; 
 import gif from '../../../img/amalie-steiness.gif'
-
+import { searchContext } from '../../../App';
 import Card from './card';
 const Views = () => {
-
-    const objects = [];
+    const {searchValue, onChange, onSubmit,getArtObjectList} = useContext(searchContext);
+    
+  
     const  requestOptions={
             method:'GET',
-            headers: { 'Content-Type': 'application/json' },
             redirect:'follow',
-            // mode:'no-cors',
-
-            // referrerPolicy: 'origin-when-cross-origin,'
+           
            
         };
     const [artObjects, setArtObjects] = useState([]);
     const [objectsId, setObjectsId] = useState([]);
     const [isLoaded, setLoaded] = useState(false);
-    const [search, setSearch] = useState("");
+   
 
-    let alldata = [];
-    // eslint-disable-next-line no-undef
-    const getMuseumArtObject =  () => {
-        // const searchValue = $(".search-box").val();
+
+
+    let count = 0;
+   
+    const isInArray = ( array, data)=>{
+        let isInside =false;
+        array.forEach(element => {
+            
+            if (element.objectID === data.objectID) {
+                isInside = true;
+            } 
+        });
+        return isInside;
+    }
+    
+    const getMuseumArtObjectId = useCallback(
+        async ( requestOptions) => {
         
-             fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects`,requestOptions)
+            await fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects`,requestOptions)
             .then(response => response.json())
             .then( (result) => {
-                console.log(result,"result");
-              
-                // IDs = data['objectIDs'];
+             
                 setObjectsId(result["objectIDs"]);
                 
-                let extract = objectsId.slice(45734,45764);
-               
-
-                if (extract !== null) {
-                    console.log('====================================');
-                    console.log(extract,"extract");
-                    console.log('====================================');
-                    extract.map(id => 
-                         
-                        fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`,requestOptions)
-                       .then(response => response.json())
-                       .then((result)=>{
-                           // console.log(JSON.parse(result));
-                          ;
-                           objects.push(result);
-                          
-                       
-              
-                       }).catch((error)=>{
-                           console.log('====================================');
-                           console.log("cant get an object with his id");
-                           console.log('====================================');
-                       })
-                    
-                    )
-                    }
-                })
-
-              
+            })
 
             .catch((error) => {
                 console.log('error', error)
-            }).finally(()=>{
-                  ///////////////7
-                  try {
-                    
-                    console.log(objects,'mes objets');
-                    setArtObjects(objects)
-                    if (artObjects.length !== 0) {
-                        alldata[0] = artObjects;
-                        setLoaded(true);
-                    }
-                    console.log('====================================');
-                    console.log(artObjects,"art object");
-                    console.log('====================================');
-                            
-                } catch (error) {
-                    console.log('====================================');
-                    console.log('cant set state for artObjetcs');
-                    console.log('====================================');
-                }
-                /////////////////
-                return true;
-            });
-    }
-
-
+            })
+    },
+      []
+    )
     
+   
 
-    const debounceFetch = debounce( ()=>  getMuseumArtObject(),550);
-
-    useEffect(()=>{
-        if (!isLoaded) {
+    const getMuseumArtObject = useCallback(
+         (objectsId , requestOptions) => {
+          
+            const data = objectsId.slice(600, 605);
+           
+        if (data !== null) {
+           
+            data.forEach(id => {
+               
+                 fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`,requestOptions)
+                 .then(response => response.json())
+                 .then((result)=>{
+                   
+                    let res = !isInArray(artObjects, result)
+                   ;
+                    if (res) {
+                        // let uniq = [...new Set([...artObjects, result])];
+                        setArtObjects([...artObjects, result])
+                        
+                    }
+                   
+                   
+                    
+                       
+                 }).catch((error)=>{
+                     console.log('====================================');
+                     console.log("cant get an object with his id");
+                     console.log('====================================');
+                 }).finally(()=>{
+ 
+                  return true;
+                 })
+           });
             
-            debounceFetch();
+            
+        }
+        if (artObjects.length ===3) {
+             setLoaded(true);
+             getArtObjectList(artObjects);
+           
+        }
+        },
+        
+
+      [artObjects]
+    )
+    
+    const debounceFetch = debounce( (requestOptions)=>  getMuseumArtObjectId( requestOptions),550);
+    const debounceFetchArt = debounce( (objectsId,requestOptions)=>  getMuseumArtObject( objectsId,requestOptions),130);
+    
+    useEffect(() => {
+        // getMuseumArtObjectId()
+        if (objectsId.length === 0) {
+            
+            debounceFetch(requestOptions)
         }
        
       
-         
-        }, [artObjects, debounceFetch, isLoaded, objectsId]);
-      
+      return () => {
+      }
+    }, [debounceFetch, objectsId, requestOptions])
+    
+
+    useEffect(() => {
+        
+        if (!isLoaded ) {
+            getMuseumArtObject( objectsId,requestOptions)
+            
+        }
+        // debounceFetchArt(objectsId,requestOptions);
        
     
-
-    
-    
-
+      
+    }, [getMuseumArtObject, isLoaded, objectsId, requestOptions])
     
 
-   
         return (
             <section className="section-padding" id="section_3">
             <div className="container">
@@ -123,24 +140,18 @@ const Views = () => {
                         <h2>Popular</h2>
                     </div>
                   
-                 
-                 
-                    
                     {
                        
                         isLoaded && 
                        artObjects.map(data => 
 
-                            <Card  key= {data["objectID"]} img={data["primaryImage"]} title ={data["title"]} credit={data["creditLine"]}></Card>
+                            <Card  key= {data["objectID"]} id={count++} img={data["primaryImage"]} title ={data["title"]} credit={data["creditLine"]}></Card>
 
                         )
-                               
-                            
-                                 
+                             
                     
                     }
-                    {
-                    console.log(artObjects,"kkkkkkkkkkkkkkk")}
+                   
                     
                     {
                     !isLoaded &&

@@ -12,21 +12,24 @@ import './css/js/counter';
 import './css/js/custom';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-
+import NotFound from './Containers/main/Pages/notFound';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-      <Route path='/' element= {<App/>}/>
-      <Route path='/advanced_research' element= {<Advanced/>}/>
-      <Route path='/details' element= {<Description/>}/>
+    
+  
+      <BrowserRouter>
+        <Routes>
+        <Route path='/' element= {<App/>}/>
+        <Route path='/advanced_research' element= {<Advanced/>}/>
+        <Route path='/details/:id/:d' element={<App/>}/>
 
-      {/* <App /> */}
-      </Routes>
-    </BrowserRouter>
-   </React.StrictMode>
+        <Route path='*' element={<NotFound/>}> </Route>
+        </Routes>
+      </BrowserRouter>
+    
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

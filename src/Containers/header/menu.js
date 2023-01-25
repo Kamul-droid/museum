@@ -1,11 +1,16 @@
-import React from 'react';
+import React, {  useContext } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../img/logo.svg'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faSearch} from '@fortawesome/free-solid-svg-icons'
-
+import { searchContext } from '../../App';
 const Menu = () => {
+   const {searchValue, onChange, onSubmit} = useContext(searchContext);
+   
     const search = <FontAwesomeIcon icon={faSearch}/>;
+   
+    
+      
     return (
         <nav className="navbar navbar-expand-lg bg-light shadow-lg">
         <div className="container">
@@ -28,14 +33,16 @@ const Menu = () => {
                     </li>
 
                     <li className="search-box">
+                        <form method='POST' onSubmit={onSubmit}>
+
                     
-                        <button className="btn-search">
+                        <button className="btn-search" type='submit'>
                             <i className=''>{search}</i>
                             
                         </button>
-                        <input type="text" className="input-search" placeholder="Type to Search..."/>
+                        <input type="text" name='searchValue' className="input-search" placeholder="Type to Search..." value={searchValue} onChange={onChange} />
                     
-                       
+                        </form>
                     </li>
 
                   
