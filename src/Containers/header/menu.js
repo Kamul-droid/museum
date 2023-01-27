@@ -1,15 +1,29 @@
-import React, {  useContext } from 'react';
+import React, {  useCallback, useContext} from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../img/logo.svg'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faSearch} from '@fortawesome/free-solid-svg-icons'
 import { searchContext } from '../../App';
 const Menu = () => {
-   const {searchValue, onChange, onSubmit} = useContext(searchContext);
+   const {searchValue, getArtObjectList, updateSearch} = useContext(searchContext);
    
     const search = <FontAwesomeIcon icon={faSearch}/>;
    
+   
+    const handleChange =  useCallback(  (e) => {
+        updateSearch(e.target.value);
+        console.log('================term====================');
+        console.log(searchValue);
+        console.log('====================================');
+    },[searchValue, updateSearch]);
     
+    
+    const handleSubmit = useCallback((e) => {
+        e.preventDefault();
+        
+        updateSearch(searchValue);
+        
+    },[searchValue, updateSearch]);
       
     return (
         <nav className="navbar navbar-expand-lg bg-light shadow-lg">
@@ -33,16 +47,16 @@ const Menu = () => {
                     </li>
 
                     <li className="search-box">
-                        <form method='POST' onSubmit={onSubmit}>
+                        <form onSubmit={handleSubmit}>
 
-                    
-                        <button className="btn-search" type='submit'>
-                            <i className=''>{search}</i>
-                            
-                        </button>
-                        <input type="text" name='searchValue' className="input-search" placeholder="Type to Search..." value={searchValue} onChange={onChange} />
-                    
+                        
+                            <button className="btn-search" type='submit' >
+                                <i className=''>{search}</i>
+                                
+                            </button>
+                            <input id='search' type="text" name='searchVal' className="input-search" placeholder="Type to Search..." value={searchValue} onChange={handleChange} />
                         </form>
+                        
                     </li>
 
                   

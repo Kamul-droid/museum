@@ -21,28 +21,39 @@ function App() {
   let params = useParams();
   const objectId = params.id ? params.id :false;
   const objectD = params.d;
-
+  
 
   const [searchValue, setSearch] = useState('');
   const [arts, setArts] = useState([]);
-  const onChange = useCallback( 
-    event => {
-        setSearch(event.target.value)
-        console.log('====================================');
-        console.log(event.target.value,"on change");
-        console.log('====================================');
-    },
-    [setSearch]);
+  // const srch = document.getElementById('search');
+  // console.log(srch.,"value");
+  
+//   const onChange = useCallback( 
+    
+//     event => {
+//       console.log('====================================');
+//       console.log('====================================');
+//         // setSearch(event.target.value)
+//         console.log('====================================');
+//         // console.log(event.target.value,"on change");
+//         console.log('====================================');
+//     },
+//     [setSearch]);
 
-const onSubmit = useCallback(
-    event =>{
-        event.preventDefault()
-        if (searchValue !== '')  {
-            console.log('====================================');
-            console.log({searchValue},"search value on submit");
-            console.log('====================================');
-        }
-    },[searchValue]);
+// const onSubmit = useCallback(
+//     event =>{
+//         event.preventDefault()
+//         // setSearch(event.target.value);
+//         if (searchValue !== '')  {
+//             console.log('====================================');
+//             console.log({searchValue},"search value on submit");
+//             console.log('====================================');
+//         }
+//     },[searchValue]);
+
+// if (!objectId) {
+//   setSearch('');
+// }
 
   const getArtObjectList = useCallback( (object)=>{
       setArts(object)
@@ -50,6 +61,13 @@ const onSubmit = useCallback(
       console.log("in appp");
       console.log('====================================');
     },[setArts]);
+
+  const updateSearch = useCallback( (object)=>{
+      setSearch(object)
+      console.log('=========sssssssssssssssssssssssssss===========================');
+      console.log(object,"in appp");
+      console.log('====================================');
+    },[]);
   
 console.log('============       ========================');
 console.log(arts,"in app");
@@ -57,7 +75,7 @@ console.log('=============     =======================');
 
   return (
     <>
-      <searchContext.Provider value={{searchValue, onChange, onSubmit, getArtObjectList}} >
+      <searchContext.Provider value={{searchValue,getArtObjectList, updateSearch}} >
         <artsContext.Provider value={arts}>
 
     
@@ -70,7 +88,7 @@ console.log('=============     =======================');
           }
           {
            
-           !objectId  && <Views></Views>
+           !objectId  && <Views searchData ={ searchValue}></Views>
            
           }
 

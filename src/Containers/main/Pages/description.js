@@ -1,6 +1,5 @@
 
-import { useParams } from 'react-router';
-import { Link } from 'react-router-dom';
+
 
 const Description = (props) => {
   const {data, listId} = props;
