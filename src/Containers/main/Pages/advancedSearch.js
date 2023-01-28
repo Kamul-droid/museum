@@ -58,7 +58,7 @@ const getData = async()=>{
         <div className="inner-form">
           <div className="basic-search">
             <div className="input-field">
-              <input id="search" type="text" placeholder="Type Keywords" name='q' />
+              <input id="search" required type="text" placeholder="Type Keywords" name='q' />
             </div>
           </div>
           <div className="advance-search">
@@ -67,9 +67,8 @@ const getData = async()=>{
             <div className="row">
 
                 <div className="input-select-departmentId">
-                
                 <select data-trigger="" name="departmentId">
-                
+               
                 <option placeholder="" value="">Category</option>
                 <option>{idOfDepartements[0]} - {departments[0]}</option>
                 <option>{idOfDepartements[1]} - {departments[1]}</option>
@@ -91,14 +90,6 @@ const getData = async()=>{
                 <option>{idOfDepartements[17]} - {departments[17]}</option>
                 <option>{idOfDepartements[18]} - {departments[18]}</option>
               </select>
-                  
-                       
-                              
-                          
-                               
-                   
-                   
-                  
               </div>  
               <div className="input-select-highlight">
                 <select data-trigger="" name="highlight">
