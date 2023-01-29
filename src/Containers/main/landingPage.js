@@ -3,7 +3,7 @@ import sideChair from '../../img/side-chair.jpg'
 import diningRoom from '../../img/dining-room.jpg'
 import fourteen from '../../img/fourteen.jpg'
 
-const Main = () => {
+const LandingPage = () => {
     return (
         <main>
 
@@ -66,4 +66,4 @@ const Main = () => {
     );
 };
 
-export default Main;
+export default LandingPage;

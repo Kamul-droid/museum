@@ -23,7 +23,7 @@ root.render(
         <Routes>
         <Route path='/' element= {<App/>}/>
         <Route path='/advanced_research' element= {<Advanced/>}/>
-        <Route path='/details/:id/:d' element={<App/>}/>
+        <Route path='/details/:id/:d/' element={<App/>}/>
 
         <Route path='*' element={<NotFound/>}> </Route>
         </Routes>
