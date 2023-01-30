@@ -1,24 +1,26 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import {debounce} from 'lodash'; 
-
 import Header from '../../header/header';
 import Menu from '../../header/menu';
 import Footer from '../../footer/footer';
 import '../../../css/research.css'
-import { get } from 'jquery';
+import {debounce} from 'lodash'; 
 
 const AdvancedSearch = () => {
   const departments = [];
   const idOfDepartements = [];
+  const objects = [];
+  let alldata = [];
 
   const  requestOptions={
-          method:'GET',
-          redirect:'follow',
+    method:'GET',
+    headers: { 'Content-Type': 'application/json' },
+    redirect:'follow',}
 
-         
-      };
   const [departmentsId, setdepartmentId] = useState([]);
-
+  const [searchId, setSearchId] = useState([]);
+  const [artObjects, setArtObjects] = useState([]);
+  const [objectsId, setObjectsId] = useState([]);
+  const [isLoaded, setLoaded] = useState(false);
 
 
   const getdepartmentsId = useCallback(
@@ -42,10 +44,90 @@ const AdvancedSearch = () => {
 const getData = async()=>{
   departmentsId.map(data => departments.push(data["displayName"]))
   departmentsId.map(data=>idOfDepartements.push(data["departmentId"]))
-  console.log(departments)
 }
     getdepartmentsId()
     getData()
+
+   
+ const getSearchArtObject =  () => {
+  // const searchValue = $(".search-box").val();
+  
+       fetch(`https://collectionapi.metmuseum.org/public/collection/v1/search?isHighlight=true&q=table`,requestOptions)
+      .then(response => response.json())
+      .then( (result) => {
+          //console.log(result,"result");
+        
+          // IDs = data['objectIDs'];
+          setObjectsId(result["objectIDs"]);
+          
+          let extract = objectsId;
+         
+
+          if (extract !== null) {
+              //console.log('====================================');
+              //console.log(extract,"extract");
+              //console.log('====================================');
+                extract.map(id => 
+                         
+                  fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`,requestOptions)
+                 .then(response => response.json())
+                 .then((result)=>{
+                    console.log(JSON.parse(result,"test"));
+                    ;
+                     objects.push(result);
+                    
+                 
+        
+                 })
+
+              )
+              }
+          }).finally(()=>{
+              try {
+                //console.log(objects,'mes objets');
+                setArtObjects(objects)
+                console.log(artObjects,'mes objets');
+
+                if (artObjects.length !== 0) {
+                    alldata[0] = artObjects;
+                    setLoaded(true);
+                }
+                console.log('====================================');
+                console.log(artObjects,"art object");
+                console.log('====================================');
+                        
+            } catch (error) {
+                console.log('====================================');
+                console.log('cant set state for artObjetcs');
+                console.log('====================================');
+            }
+            /////////////////
+            return true;
+        });
+
+
+
+      }
+
+const debounceFetch = debounce( ()=>  getSearchArtObject(),550);
+
+useEffect(()=>{
+    if (!isLoaded) {
+        
+        debounceFetch();
+    }
+   
+  
+     
+    }, [artObjects, debounceFetch, isLoaded, objectsId]);
+
+
+getSearchArtObject()
+
+
+
+
+
 
     return (
 
@@ -69,7 +151,7 @@ const getData = async()=>{
                 <div className="input-select-departmentId">
                 <select data-trigger="" name="departmentId">
                
-                <option placeholder="" value="">Category</option>
+                <option placeholder="" value="" disabled selected>Category</option>
                 <option>{idOfDepartements[0]} - {departments[0]}</option>
                 <option>{idOfDepartements[1]} - {departments[1]}</option>
                 <option>{idOfDepartements[2]} - {departments[2]}</option>
@@ -93,7 +175,7 @@ const getData = async()=>{
               </div>  
               <div className="input-select-highlight">
                 <select data-trigger="" name="highlight">
-                    <option placeholder="" value="">highlight</option>
+                    <option placeholder="" value="" disabled selected>highlight</option>
                     <option>True</option>
                     <option>False</option>
                   </select>
@@ -101,7 +183,7 @@ const getData = async()=>{
 
                   <div className="input-field-hasImages">
                   <select data-trigger="" name="hasImages">
-                    <option placeholder="" value="">Image</option>
+                    <option placeholder="" value="" disabled selected>Image</option>
                     <option>True</option>
                     <option>False</option>
                   </select>
@@ -118,7 +200,7 @@ const getData = async()=>{
             
             </div>
             <div className="row third">
-                  <button className="btn-delete" id="delete">Reset</button>
+                  <button className="btn-delete" id="delete" >Reset</button>
                   <button className="btn-advanceSearch">Search</button>
             </div>
           </div>
