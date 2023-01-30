@@ -18,7 +18,7 @@ const Card = (props) => {
                                                 
                     </div>
 
-                    <Link to={"/details/"+id+"/true"} className="custom-btn btn">Details</Link>
+                    <Link to={"/details/"+id+"/true/"} className="custom-btn btn">Details</Link>
                 </div>
             </div>
             

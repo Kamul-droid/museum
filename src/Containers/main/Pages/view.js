@@ -30,9 +30,7 @@ const Views = (props) => {
     const [artQObjects, setArtQObjects] = useState([]);
     const [objectsQId, setObjectsQId] = useState([]);
     const [isQLoaded, setQLoaded] = useState(false);
-    let dataToDisplay = [];
-    const dataToDisplayQ = [];
-
+    
 
 
     let count = 0;
@@ -49,7 +47,7 @@ const Views = (props) => {
     }
 
     const debounceFetch = debounce( (requestOptions)=>  getMuseumArtObjectId(),550);
-    const debouncePFetch = debounce( (requestOptions)=>  getMuseumArtPObjectId(),550);
+    // const debouncePFetch = debounce( (requestOptions)=>  getMuseumArtPObjectId(),550);
     // const debounceFetchQuery = debounce( (requestOptions)=> getMuseumArtObjectIdWithQuery( requestOptions),550);
     // const debounceFetchArt = debounce( (objectsId,requestOptions)=>  getMuseumArtObject( objectsId,requestOptions),130);
     
@@ -91,10 +89,7 @@ const Views = (props) => {
                        // let uniq = [...new Set([...artObjects, result])];
                        
                        setArtObjects([...artObjects, result])
-                       dataToDisplay.push(result);
-                       console.log('============dsp========================');
-                       console.log(dataToDisplay);
-                       console.log('====================================');
+                      
                       
                     }
                   
@@ -142,94 +137,94 @@ const Views = (props) => {
     }, [getMuseumArtObject,isQLoaded, isLoaded, objectsId, requestOptions])
    
     
-    // highLight
-    const getMuseumArtPObjectId = useCallback(
-        async ( requestOptions) => {
+    // // highLight
+    // const getMuseumArtPObjectId = useCallback(
+    //     async ( requestOptions) => {
         
-            await fetch(`https://collectionapi.metmuseum.org/public/collection/v1/search?isHighlight=true`,requestOptions)
-            .then(response => response.json())
-            .then( (result) => {
+    //         await fetch(`https://collectionapi.metmuseum.org/public/collection/v1/search?isHighlight=true`,requestOptions)
+    //         .then(response => response.json())
+    //         .then( (result) => {
              
-                setObjectsPId(result["objectIDs"]);
+    //             setObjectsPId(result["objectIDs"]);
 
                 
-            })
+    //         })
 
-            .catch((error) => {
-                console.log('error', error)
-            })
-    },
-      []
-    )
+    //         .catch((error) => {
+    //             console.log('error', error)
+    //         })
+    // },
+    //   []
+    // )
     
     
-    const getMuseumArtPObject = useCallback(
-         (objectsPId , requestOptions) => {
-            const data= objectsPId.slice(600, 605);
+    // const getMuseumArtPObject = useCallback(
+    //      (objectsPId , requestOptions) => {
+    //         const data= objectsPId.slice(600, 605);
         
-        if (data !== null) {
+    //     if (data !== null) {
            
-            data.forEach(id => {
+    //         data.forEach(id => {
                
-                 fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`,requestOptions)
-                 .then(response => response.json())
-                 .then((result)=>{
+    //              fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`,requestOptions)
+    //              .then(response => response.json())
+    //              .then((result)=>{
                   
-                    let res = !isInArray(artPObjects, result)
-                   ;
-                   if (res) {
-                       // let uniq = [...new Set([...artObjects, result])];
+    //                 let res = !isInArray(artPObjects, result)
+    //                ;
+    //                if (res) {
+    //                    // let uniq = [...new Set([...artObjects, result])];
                        
-                       setArtObjects([...artPObjects, result])
-                       dataToDisplay.push(result);
-                       console.log('============dsp========================');
-                       console.log(dataToDisplay);
-                       console.log('====================================');
+    //                    setArtObjects([...artPObjects, result])
+    //                    dataToDisplay.push(result);
+    //                    console.log('============dsp========================');
+    //                    console.log(dataToDisplay);
+    //                    console.log('====================================');
                       
-                    }
+    //                 }
                   
                        
-                 }).catch((error)=>{
-                     console.log('====================================');
-                     console.log("cant get an object with his id");
-                     console.log('====================================');
-                 }).finally(()=>{
+    //              }).catch((error)=>{
+    //                  console.log('====================================');
+    //                  console.log("cant get an object with his id");
+    //                  console.log('====================================');
+    //              }).finally(()=>{
  
-                  return true;
-                 })
-           });
+    //               return true;
+    //              })
+    //        });
             
             
-        }
-        if (artPObjects.length ===3 ) {
-            count = 0;
-             setPLoaded(true);
-            //  setQLoaded(false);
-            //  getArtObjectList([]);
-             getArtObjectList(artPObjects);
-            //  setSearch('');
-        }
-        },
+    //     }
+    //     if (artPObjects.length ===3 ) {
+    //         count = 0;
+    //          setPLoaded(true);
+    //         //  setQLoaded(false);
+    //         //  getArtObjectList([]);
+    //          getArtObjectList(artPObjects);
+    //         //  setSearch('');
+    //     }
+    //     },
         
 
-      [artPObjects]
-    )
+    //   [artPObjects]
+    // )
 
-    useEffect(() => {
-        if ( objectsPId.length === 0) {
-             debouncePFetch()
-        }
+    // useEffect(() => {
+    //     if ( objectsPId.length === 0) {
+    //          debouncePFetch()
+    //     }
     
-    }, [debouncePFetch, objectsPId])
+    // }, [debouncePFetch, objectsPId])
     
     // art object
-    useEffect(() => {
-           if (!isPLoaded ) {
-            getMuseumArtPObject( objectsPId,requestOptions)
+    // useEffect(() => {
+    //        if (!isPLoaded ) {
+    //         getMuseumArtPObject( objectsPId,requestOptions)
            
-        }
+    //     }
      
-    }, [getMuseumArtObject,isPLoaded, isLoaded, objectsPId, requestOptions])
+    // }, [getMuseumArtObject,isPLoaded, isLoaded, objectsPId, requestOptions])
 
     // search
 
@@ -340,7 +335,7 @@ const Views = (props) => {
                         <h2>Popular</h2>
                     </div>
                    
-                    {console.log(dataToDisplay,"display")}
+                   
                     
                     
                   

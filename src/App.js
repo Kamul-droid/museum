@@ -2,16 +2,17 @@
 import './css/App.css';
 import './css/bootstrap-icons.css';
 import './css/bootstrap.min.css';
-import './css/templatemo-kind-heart-charity.css';
+import './css/landingPage.css';
 import Header from './Containers/header/header';
 import Menu from './Containers/header/menu';
-import Main from './Containers/main/main';
+import LandingPage from './Containers/main/landingPage';
 import Footer from './Containers/footer/footer';
 // import Home from './Containers/main/Pages/home';
 import Views from './Containers/main/Pages/view';
-import React, { useCallback, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useCallback,useEffect ,useState } from 'react';
+import { Navigate, redirect, useLocation, useNavigate, useNavigation, useParams } from 'react-router-dom';
 import Description from './Containers/main/Pages/description';
+import NotFound from './Containers/main/Pages/notFound';
 const searchContext = React.createContext('');
 const artsContext = React.createContext([]);
 
@@ -19,42 +20,22 @@ const artsContext = React.createContext([]);
 function App() {
 
   let params = useParams();
+  const location = useLocation();
   const objectId = params.id ? params.id :false;
-  const objectD = params.d;
+  const canSeeDetails = params.d ? params.d:false;
+  let currentPathName = location.pathname.split('/')[1]
   
 
   const [searchValue, setSearch] = useState('');
   const [arts, setArts] = useState([]);
-  // const srch = document.getElementById('search');
-  // console.log(srch.,"value");
-  
-//   const onChange = useCallback( 
-    
-//     event => {
-//       console.log('====================================');
-//       console.log('====================================');
-//         // setSearch(event.target.value)
-//         console.log('====================================');
-//         // console.log(event.target.value,"on change");
-//         console.log('====================================');
-//     },
-//     [setSearch]);
 
-// const onSubmit = useCallback(
-//     event =>{
-//         event.preventDefault()
-//         // setSearch(event.target.value);
-//         if (searchValue !== '')  {
-//             console.log('====================================');
-//             console.log({searchValue},"search value on submit");
-//             console.log('====================================');
-//         }
-//     },[searchValue]);
 
-// if (!objectId) {
-//   setSearch('');
-// }
 
+const reinitializeSearchValue = (arts)=>{
+  if (arts.length !==0) {
+    setSearch('');
+  }
+}
   const getArtObjectList = useCallback( (object)=>{
       setArts(object)
       console.log('====================================');
@@ -64,14 +45,16 @@ function App() {
 
   const updateSearch = useCallback( (object)=>{
       setSearch(object)
-      console.log('=========sssssssssssssssssssssssssss===========================');
-      console.log(object,"in appp");
-      console.log('====================================');
+     
     },[]);
+    
+  useCallback(
+    () => {
+      reinitializeSearchValue(arts);
+    },
+    [arts],
+  )
   
-console.log('============       ========================');
-console.log(arts,"in app");
-console.log('=============     =======================');
 
   return (
     <>
@@ -83,18 +66,23 @@ console.log('=============     =======================');
           <Menu></Menu>
           { 
 
-            searchValue ===''  && !objectId && <Main></Main>
+            (searchValue ==='' || canSeeDetails !=="true") && !objectId && <LandingPage></LandingPage>
 
           }
           {
            
-           !objectId  && <Views searchData ={ searchValue}></Views>
+           (!objectId || searchValue !=='') && <Views searchData ={ searchValue}></Views>
            
           }
+          
 
            {
-            objectD ==="true" && <Description data = {arts} listId={objectId} ></Description>
+            searchValue ==='' && canSeeDetails ==="true" && arts.length !==0 && <Description data = {arts} listId={objectId} ></Description>
            }
+           {
+            currentPathName ==='details' && canSeeDetails !=="true" && arts.length ===0 && <Description data = {arts} listId={objectId}  ></Description>
+           }
+          
        
           <Footer></Footer>
         </artsContext.Provider>
