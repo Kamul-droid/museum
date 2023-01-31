@@ -65,7 +65,7 @@ const reinitializeSearchValue = (arts)=>{
 
   return (
     <>
-      <searchContext.Provider value={{searchValue,artQObjects,setArtQObjects,getArtObjectList, updateSearch,isInArray}} >
+      <searchContext.Provider  value={{searchValue,artQObjects,setArtQObjects,getArtObjectList, updateSearch,isInArray}} >
         <artsContext.Provider value={arts}>
 
     

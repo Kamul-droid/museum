@@ -185,23 +185,23 @@ const getData = async()=>{
   
     <Header></Header>
     <Menu></Menu> 
-    <div className="s008">
+    <div data-testid ='advanced-search' className="advanced-search">
       <form onSubmit={handleSubmit}>
         <div className="inner-form">
           <div className="basic-search">
             <div className="input-field">
-              <input id="search" required type="text" placeholder="Type Keywords" name='q' value={formData.q} onChange={handleInputChange} />
+              <input data-testid = 'search' id="search" required type="text" placeholder="Type Keywords" name='q' value={formData.q} onChange={handleInputChange} />
             </div>
           </div>
-          <div className="advance-search">
-            <span>Advanced Search</span>
+          <div data-testid = 'filter-container'className="advance-search">
+            <span data-testid = 'title-filter-container'>Advanced Search</span>
             
             <div className="row">
 
                 <div className="input-select-departmentId">
-                <select id='dep' data-trigger="" name="departmentId" value={formData.departmentId} onChange={handleInputChange} >
+                <select data-testid = 'select-filter-department' id='dep' data-trigger="" name="departmentId" value={formData.departmentId} onChange={handleInputChange} >
                
-                <option placeholder="" value="" id='dep'>Category</option>
+                <option data-testid = 'category-filter'placeholder="" value="" id='dep'>Category</option>
                 {departments.map(data =>
                 
                 <option key={data["id"]} id ={data["id"]} value ={data["id"]}> {data["id"]} - {data["dep"]}</option>
@@ -211,34 +211,34 @@ const getData = async()=>{
               </select>
               </div>  
               <div className="input-select-highlight">
-                <select data-trigger="" name="highlight" id='high' value={formData.highlight} onChange={handleInputChange} >
-                    <option placeholder="" value="" >highlight</option>
+                <select data-testid = 'select-filter-highlight' data-trigger="" name="highlight" id='high' value={formData.highlight} onChange={handleInputChange} >
+                    <option data-testid = 'highlight-filter'placeholder="" value="" >Highlight</option>
                     <option value="True">True</option>
                     <option value="False">False</option>
                   </select>
                 </div>                 
 
                   <div className="input-field-hasImages">
-                  <select data-trigger="" name="hasImages" id='img' onChange={handleInputChange} value={formData.hasImages} >
-                    <option placeholder="" value="">Image</option>
+                  <select data-testid = 'select-filter-image' data-trigger="" name="hasImages" id='img' onChange={handleInputChange} value={formData.hasImages} >
+                    <option data-testid = 'image-filter' placeholder="" value="">Image</option>
                     <option>True</option>
                     <option>False</option>
                   </select>
               </div>
             </div>
-            <div className="row second">
+            <div data-testid = 'row-second' className="row second">
             <div className="input-select-geoLocation">                  
-                    <input  id='geo' type="text" placeholder="géolocation(ex:Europe | Paris)"  value={formData.geoLocation} onChange={handleInputChange} name='geoLocation' />
+                    <input  data-testid = 'input-geolocalisation'id='geo' type="text" placeholder="géolocation(ex:Europe | Paris)"  value={formData.geoLocation} onChange={handleInputChange} name='geoLocation' />
             </div>
-                <input id='tag' type="text" className="input-tag" placeholder="tag"  value={formData.tags} name='tags' onChange={handleInputChange}/>
+                <input data-testid = 'input-tag' id='tag' type="text" className="input-tag" placeholder="tag"  value={formData.tags} name='tags' onChange={handleInputChange}/>
             <div className="input-select-medium">                  
-                    <input id='med' type="text" placeholder="ex: Peintures | Céramique"  value={formData.medium} onChange={handleInputChange} name='medium' />
+                    <input data-testid = 'input-medium' id='med' type="text" placeholder="ex: Peintures | Céramique"  value={formData.medium} onChange={handleInputChange} name='medium' />
                 </div>
             
             </div>
-            <div className="row third">
-                  <button className="btn-delete" id="delete">Reset</button>
-                  <button type="submit" className="btn-advanceSearch" >Search</button>
+            <div data-testid = 'row-third' className="row third">
+                  <button data-testid = 'btn-delete' className="btn-delete" id="delete">Reset</button>
+                  <button data-testid = 'btn-advanceSearch' type="submit" className="btn-advanceSearch" >Search</button>
             </div>
           </div>
         </div>

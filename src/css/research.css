@@ -1,5 +1,5 @@
 
-  .s008 {
+  .advanced-search {
     min-height: 100vh;
     display: -ms-flexbox;
     display: flex;
@@ -14,14 +14,14 @@
   }
     /* formulaire recherche avancée */
 
-  .s008 form {
+  .advanced-search form {
     width: 100%;
     max-width: 800px;
   }
 
 
   /* barre de recherche */
-  .s008 form .inner-form .input-field input {
+  .advanced-search form .inner-form .input-field input {
     height: 100%;
     border: 0;
     background: #fff;
@@ -40,7 +40,7 @@
 
 
     /* barre de recherche ("type de mot clef")*/
-  .s008 form .inner-form .input-field input::-webkit-input-placeholder {
+  .advanced-search form .inner-form .input-field input::-webkit-input-placeholder {
     color: #e45c27;
     font-size: 18px;
   }
@@ -95,12 +95,12 @@
     color: #000;
   }
     /* barrre de recherche */
-  .s008 form .inner-form .basic-search {
+  .advanced-search form .inner-form .basic-search {
     margin-bottom: 60px;
     box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
   }
   /* barrre de recherche */
-  .s008 form .inner-form .basic-search .input-field {
+  .advanced-search form .inner-form .basic-search .input-field {
     width: 100%;
     padding: 20px 40px 20px 40px;
   }
