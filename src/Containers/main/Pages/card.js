@@ -1,8 +1,9 @@
+import { data } from 'jquery';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Card = (props) => {
-    const {img, title, credit, id} = props;
+    const {img, title, credit, id, object} = props;
 
     return (
         <div className="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
@@ -18,7 +19,8 @@ const Card = (props) => {
                                                 
                     </div>
 
-                    <Link to={"/details/"+id+"/true/"} className="custom-btn btn">Details</Link>
+                    <Link to={{pathname:"/details/"+id+"/true/",
+                    state:{data : object}}} className="custom-btn btn">Details</Link>
                 </div>
             </div>
             

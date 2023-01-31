@@ -5,10 +5,10 @@ const Description = (props) => {
     
   const {data, listId} = props;
   let object;
+  console.log(data,'my datagg');
   
-  
-
-  if (data.length !==0 && data[parseInt(listId)]) {
+// 
+  if (data ) {
       object = data[parseInt(listId)];
       return(
         <>
