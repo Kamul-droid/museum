@@ -1,6 +1,4 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import {debounce} from 'lodash'; 
-
 import Header from '../../header/header';
 import Menu from '../../header/menu';
 import Footer from '../../footer/footer';
@@ -14,11 +12,10 @@ const AdvancedSearch = () => {
   
 
   const  requestOptions={
-          method:'GET',
-          redirect:'follow',
+    method:'GET',
+    headers: { 'Content-Type': 'application/json' },
+    redirect:'follow',}
 
-         
-      };
   const [departmentsId, setdepartmentId] = useState([]);
   const  [idOfRequestObject, setIdOfRequestObject] = useState([]);
   const  [searchObject, setSearchObject] = useState([]);
@@ -181,7 +178,7 @@ const getData = async()=>{
 
     
 
-// console.log(idOfRequestObject,'data');
+
     return (
 
   <>
