@@ -224,12 +224,12 @@ const Views = (props) => {
 
    
         return (
-            <section className="section-padding" id="section_3">
-            <div className="container">
-                <div className="row">
+            <section data-testid = 'view' className="section-padding" id="section_3">
+            <div data-testid = 'view-container'className="container">
+                <div data-testid = 'row'className="row">
 
-                    <div className="col-lg-12 col-12 text-center mb-4">
-                        <h2>Popular</h2>
+                    <div data-testid = 'title' className="col-lg-12 col-12 text-center mb-4">
+                        <h2 data-testid = 'title-view'>Popular</h2>
                     </div>
                                      
                     {
@@ -265,13 +265,13 @@ const Views = (props) => {
                     {
                     !isLoaded  &&
                     
-                    <div className="text-center">
+                    <div data-testid = 'waiting-view' className="text-center">
                         <div className="custom-block-wrap">
 
                             <img src={gif} alt="waiting" width="5px" height={50}  className="custom-block-image-waiting img-fluid" />
                     
                         </div>
-                        <p className='h3'>We are getting for you the most beautiful arts object of our librairies</p>
+                        <p data-testid = 'btn-advanceSearch' className='h3'>We are getting for you the most beautiful arts object of our librairies</p>
                     </div>
                    
                    
