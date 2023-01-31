@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import {BrowserRouter as Router} from "react-router-dom";
-import LandingPage from './landingPage'
+import LandingPage from '../Containers/main/landingPage'
 import sideChair from '../../img/side-chair.jpg'
 import diningRoom from '../../img/dining-room.jpg'
 import fourteen from '../../img/fourteen.jpg'
