@@ -1,9 +1,10 @@
 import { render, screen } from '@testing-library/react'
 import {BrowserRouter as Router} from "react-router-dom";
 import Menu from './menu'
+import logo from '../../img/logo.svg'
 
 
-describe('Test affichage enseigne', () => {
+describe('Test display enseigne', () => {
 
     test('Affichage menu', async () => {
         render(
@@ -25,6 +26,17 @@ describe('Test affichage enseigne', () => {
         expect(testImage.alt).toContain("The Metropolitan Museum of Art");      
     })
 
+    test('image logo', async () => {
+        render(
+         <Router> 
+            <Menu />
+         </Router>
+        )
+        const imageLogo = screen.getByTestId('image-logo')
+        expect(imageLogo).toBeInTheDocument()
+        expect(imageLogo.src).toContain(logo);
+        })
+
     test('logo text ', async () => {
         render(
             <Router>        
@@ -39,9 +51,9 @@ describe('Test affichage enseigne', () => {
      )
     });
 
-    describe('Test Menu burger', () => {
+    describe('Test burger Menu', () => {
 
-     test('boutton menu burger ', async () => {
+     test('boutton burger menu', async () => {
         render(
             <Router>        
             <Menu />
@@ -134,7 +146,7 @@ describe('Test affichage enseigne', () => {
         expect(btnAdvancedSearch).toBeInTheDocument()
         
      })
-     test('affichage advanced search', async () => {
+     test('advanced search display', async () => {
         render(
          <Router>        
              <Menu />
@@ -144,10 +156,4 @@ describe('Test affichage enseigne', () => {
      expect(btnAdvancedSearch.textContent).toBe('Advanced search')
      })
      
-    });    
-
-
-
-
-
-
+});    

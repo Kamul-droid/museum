@@ -116,7 +116,7 @@ const Menu = () => {
         <nav data-testid ='div-menu'className="navbar navbar-expand-lg bg-light shadow-lg">
         <div className="container">
             <Link className="navbar-brand" to="/">
-                <img src={logo} className="logo img-fluid" alt="The Metropolitan Museum of Art"/>
+                <img data-testid ='image-logo'src={logo} className="logo img-fluid" alt="The Metropolitan Museum of Art"/>
                 <span data-testid ='text-logo'>
                 Museum of Art
                     <small>Online Museum</small>
