@@ -113,35 +113,35 @@ const Menu = () => {
  
       
     return (
-        <nav className="navbar navbar-expand-lg bg-light shadow-lg">
+        <nav data-testid ='div-menu'className="navbar navbar-expand-lg bg-light shadow-lg">
         <div className="container">
             <Link className="navbar-brand" to="/">
                 <img src={logo} className="logo img-fluid" alt="The Metropolitan Museum of Art"/>
-                <span>
+                <span data-testid ='text-logo'>
                 Museum of Art
                     <small>Online Museum</small>
                 </span>
             </Link>
 
-            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button data-testid ='btn-menu'className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>
 
-            <div className="collapse navbar-collapse" id="navbarNav">
-                <ul className="navbar-nav ms-auto">
-                    <li className="nav-item">
+            <div data-testid ='div-menu-items'className="collapse navbar-collapse" id="navbarNav">
+                <ul data-testid ='list-menu-items'className="navbar-nav ms-auto">
+                    <li data-testid ='home-item'className="nav-item">
                         <Link className="nav-link click-scroll" to="/">Home</Link>
                     </li>
 
-                    <li className="search-box">
+                    <li data-testid ='search-box-item'className="search-box">
                         <form onSubmit={handleSubmit}>
 
                         
-                            <button className="btn-search" type='submit' >
+                            <button data-testid ='btn-search-box'className="btn-search" type='submit' >
                                 <i className=''>{search}</i>
                                 
                             </button>
-                            <input id='search' type="text" name='searchVal' className="input-search" placeholder="Type to Search..." value={searchValue} onChange={handleChange} />
+                            <input data-testid = 'search' id='search' type="text" name='searchVal' className="input-search" placeholder="Type to Search..." value={searchValue} onChange={handleChange} />
                         </form>
                         
                     </li>
@@ -150,8 +150,8 @@ const Menu = () => {
 
                     
 
-                    <li className="nav-item ms-3">
-                        <Link className="nav-link custom-btn custom-border-btn btn" to="/advanced_research">Advanced search</Link>
+                    <li data-testid ='advanced_search-item'className="nav-item ms-3">
+                        <Link data-testid = 'advSearch' className="nav-link custom-btn custom-border-btn btn" to="/advanced_research">Advanced search</Link>
                     </li>
                 </ul>
             </div>

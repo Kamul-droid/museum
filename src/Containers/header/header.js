@@ -4,17 +4,17 @@ import { Link } from 'react-router-dom';
 
 const header = () => {
     return (
-        <header className="site-header">
-            <div className="container">
+        <header data-testid ='header'className="site-header">
+            <div data-testid ='container-header'className="container">
                 <div className="row">
                     
-                    <div className="col-lg-8 col-12 d-flex flex-wrap">
-                        <p className="d-flex me-4 mb-0">
+                    <div data-testid ='contact-container'className="col-lg-8 col-12 d-flex flex-wrap">
+                        <p data-testid ='address-text'className="d-flex me-4 mb-0">
                             <i className="bi-geo-alt me-2"></i>
                             The Metropolitan Museum of Art 20, 0150 Paris, France
                         </p>
 
-                        <p className="d-flex mb-0">
+                        <p data-testid ='mail-text'className="d-flex mb-0">
                             <i className="bi-envelope me-2"></i>
 
                             <Link to="mailto:kamulnassoma@gmail.com">
@@ -23,25 +23,25 @@ const header = () => {
                         </p>
                     </div>
 
-                    <div className="col-lg-3 col-12 ms-auto d-lg-block d-none">
-                        <ul className="social-icon">
-                            <li className="social-icon-item">
+                    <div data-testid ='follow-container'className="col-lg-3 col-12 ms-auto d-lg-block d-none">
+                        <ul data-testid ='list-display'className="social-icon">
+                            <li data-testid ='twitter-item' className="social-icon-item">
                                 <Link to='/' className="social-icon-link bi-twitter"></Link>
                             </li>
 
-                            <li className="social-icon-item">
+                            <li data-testid ='facebook-item' className="social-icon-item">
                                 <Link to='/' className="social-icon-link bi-facebook"></Link>
                             </li>
 
-                            <li className="social-icon-item">
+                            <li data-testid ='instagram-item' className="social-icon-item">
                                 <Link to='/' className="social-icon-link bi-instagram"></Link>
                             </li>
 
-                            <li className="social-icon-item">
+                            <li data-testid ='youtube-item' className="social-icon-item">
                                 <Link to='/' className="social-icon-link bi-youtube"></Link>
                             </li>
 
-                            <li className="social-icon-item">
+                            <li data-testid ='whatsapp-item' className="social-icon-item">
                                 <Link to='/' className="social-icon-link bi-whatsapp"></Link>
                             </li>
                         </ul>
