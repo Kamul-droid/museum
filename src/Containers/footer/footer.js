@@ -3,26 +3,26 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
     return (
-        <footer className="site-footer">
-            <div className="container">
+        <footer data-testid ='footer' className="site-footer">
+            <div data-testid ='footer-container' className="container">
                 <div className="row">
                     <div className="col-lg-3 col-12 mb-4">
-                        <img src="images/logo.png" className="logo img-fluid" alt=""/>
+                        <img src="images\logo.png" className="logo img-fluid" alt=""/>
                     </div>
 
-                    <div className="col-lg-4 col-md-6 col-12 mb-4">
-                        <h5 className="site-footer-title mb-3">Quick Links</h5>
+                    <div data-testid ='quick-link-container'className="col-lg-4 col-md-6 col-12 mb-4">
+                        <h5 data-testid ='quick-link-title' className="site-footer-title mb-3">Quick Links</h5>
 
-                        <ul className="footer-menu">
-                            <li className="footer-menu-item"><Link to="/" className="footer-menu-link">Our Story</Link></li>
+                        <ul data-testid ='quick-link-list'className="footer-menu">
+                            <li data-testid ='our-story-item' className="footer-menu-item"><Link to="/" className="footer-menu-link">Our Story</Link></li>
 
-                            <li className="footer-menu-item"><Link to="/" className="footer-menu-link">Newsroom</Link></li>
+                            <li data-testid ='newsroom-item' className="footer-menu-item"><Link to="/" className="footer-menu-link">Newsroom</Link></li>
 
-                            <li className="footer-menu-item"><Link to="/" className="footer-menu-link">Causes</Link></li>
+                            <li data-testid ='causes-item' className="footer-menu-item"><Link to="/" className="footer-menu-link">Causes</Link></li>
 
-                            <li className="footer-menu-item"><Link to="/" className="footer-menu-link">Become a volunteer</Link></li>
+                            <li data-testid ='volunteer-item' className="footer-menu-item"><Link to="/" className="footer-menu-link">Become a volunteer</Link></li>
 
-                            <li className="footer-menu-item"><Link to="/" className="footer-menu-link">Partner with us</Link></li>
+                            <li data-testid ='partner-item' className="footer-menu-item"><Link to="/" className="footer-menu-link">Partner with us</Link></li>
                         </ul>
                     </div>
 
