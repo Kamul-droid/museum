@@ -1,7 +1,7 @@
 
 import React, { useContext, useEffect, useState, useCallback } from 'react';
 import {debounce} from 'lodash'; 
-import gif from '../../../img/amalie-steiness.gif'
+import gif from '../../../img/loading.gif'
 import { searchContext } from '../../../App';
 import Card from './card';
 
@@ -9,12 +9,10 @@ import Card from './card';
 
 const Views = (props) => {
 
-    const {searchValue, getArtObjectList, updateSearch} = useContext(searchContext);
+    const {searchValue, artQObjects, getArtObjectList, updateSearch,isInArray} = useContext(searchContext);
 
-    let {searchData} = props;
-  console.log('========== views==========================');
-  console.log(searchData);
-  console.log('====================================');
+    let {searchData,data} = props;
+ 
     const  requestOptions={
             method:'GET',
             redirect:'follow',
@@ -27,24 +25,13 @@ const Views = (props) => {
     const [artPObjects, setArtPObjects] = useState([]);
     const [objectsPId, setObjectsPId] = useState([]);
     const [isPLoaded, setPLoaded] = useState(false);
-    const [artQObjects, setArtQObjects] = useState([]);
-    const [objectsQId, setObjectsQId] = useState([]);
-    const [isQLoaded, setQLoaded] = useState(false);
+    
     
 
 
     let count = 0;
    
-    const isInArray = ( array, data)=>{
-        let isInside =false;
-        array.forEach(element => {
-            
-            if (element.objectID === data.objectID) {
-                isInside = true;
-            } 
-        });
-        return isInside;
-    }
+    
 
     const debounceFetch = debounce( (requestOptions)=>  getMuseumArtObjectId(),550);
     // const debouncePFetch = debounce( (requestOptions)=>  getMuseumArtPObjectId(),550);
@@ -60,7 +47,7 @@ const Views = (props) => {
             .then( (result) => {
              
                 setObjectsId(result["objectIDs"]);
-
+                
                 
             })
 
@@ -86,9 +73,9 @@ const Views = (props) => {
                     let res = !isInArray(artObjects, result)
                    ;
                    if (res) {
-                       // let uniq = [...new Set([...artObjects, result])];
+                     
                        
-                       setArtObjects([...artObjects, result])
+                       setArtObjects(artObjects => [...artObjects, result])
                       
                       
                     }
@@ -134,8 +121,9 @@ const Views = (props) => {
            
         }
      
-    }, [getMuseumArtObject,isQLoaded, isLoaded, objectsId, requestOptions])
+    }, [getMuseumArtObject, isLoaded, objectsId, requestOptions])
    
+    var unique = [...new Set(artQObjects)];
     
     // // highLight
     // const getMuseumArtPObjectId = useCallback(
@@ -228,104 +216,13 @@ const Views = (props) => {
 
     // search
 
-    useEffect(() => {
+    
        
-        const getMuseumArtObjectIdWithQuery = 
-            async (searchData ) => {
-            
-                await fetch(`https://collectionapi.metmuseum.org/public/collection/v1/search?q=${searchData}`,requestOptions)
-                .then(response => response.json())
-                .then( (result) => {
-                    setObjectsQId(result["objectIDs"]);                                        
-                }) 
-                .catch((error) => {
-                    console.log('error', error)
-                })
-        }
-          
-        setQLoaded(false);
-       
-
-        
-        if (searchData !=='') {
-            getMuseumArtObjectIdWithQuery(searchData).catch(console.log("error k"))
-            
-            //  debounceFetchQuery(requestOptions)
-            console.log('============== idq======================');
-            console.log(objectsQId);
-            console.log('====================================');
-            // updateSearch('');
-        }
      
-    }, [objectsQId,searchData])
+
     
 
-    useEffect(() => {
-        const getMuseumArtQObject = 
-            (objectsQId ) => {
-               
-            //    const data= objectsQId;
-
-              
-            if (objectsQId.length !==0) {
-                
-                objectsQId.forEach(id => {
-                    
-                        fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`,requestOptions)
-                        .then(response => response.json())
-                        .then((result)=>{
-                        
-                        let res = !isInArray(artQObjects, result);
-                        
-                        if (res) {
-                            // let uniq = [...new Set([...artObjects, result])];
-                            
-                            setArtQObjects([...artQObjects, result])
-                           
-                        }
-                        
-                        }).catch((error)=>{
-                            console.log('====================================');
-                            console.log("cant get an object with his id");
-                            console.log('====================================');
-                        }).finally(()=>{
-        
-                        return true;
-                        })
-                });
-                
-                
-            }
-            if (searchData !=='') {
-                
-                // count = 0;
-                    
-                //  setLoaded(false);
-                //  getArtObjectList([]);
-                    getArtObjectList(artQObjects);
-                    // updateSearch('');
-                    setQLoaded(true);
-                    
-                   
-            }
-            }
-       
-        
-      
-            if (!isQLoaded) {
-                
-                getMuseumArtQObject(objectsQId)
-            } 
-                   
-            
-        
-        // debounceFetchArt(objectsId,requestOptions);
-       
-    
-      
-    }, [objectsQId])
-    
- 
+   
         return (
             <section className="section-padding" id="section_3">
             <div className="container">
@@ -334,27 +231,18 @@ const Views = (props) => {
                     <div className="col-lg-12 col-12 text-center mb-4">
                         <h2>Popular</h2>
                     </div>
-                   
-                   
-                    
-                    
-                  
+                                     
                     {
-                       
+                      
                         searchData==='' && isLoaded && 
                        artObjects.map(data => 
 
                             <Card  key= {data["objectID"]} id={count++} img={data["primaryImage"]} title ={data["title"]} credit={data["creditLine"]}></Card>
 
                         )
-
-
-                      
-                             
-                    
+       
                     }
                     {
-
                         searchData==='' && isPLoaded && artPObjects.map(data => 
 
                             <Card  key= {data["objectID"]} id={count++} img={data["primaryImage"]} title ={data["title"]} credit={data["creditLine"]}></Card>
@@ -363,8 +251,9 @@ const Views = (props) => {
                     }
 
                     {
-                          objectsQId.length !== 0 && 
-                       artQObjects.map(data => 
+                        
+                        unique.length !== 0 && 
+                        unique.map(data => 
 
                             <Card  key= {data["objectID"]} id={count++} img={data["primaryImage"]} title ={data["title"]} credit={data["creditLine"]}></Card>
 
@@ -387,9 +276,9 @@ const Views = (props) => {
                    
                    
                     }    
-                    {/* {
+                     {
 
-                   searchData !=='' && !isQLoaded  &&
+                   searchData !=='' && artQObjects.length === 0  &&
                     
                     <div className="text-center">
                         <div className="custom-block-wrap">
@@ -402,7 +291,7 @@ const Views = (props) => {
                    
                    
                     }    
-                      */}
+                      
 
 
                 </div>

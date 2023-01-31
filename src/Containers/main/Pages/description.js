@@ -4,7 +4,7 @@ import '../../../css/js/noFoundGsap'
 const Description = (props) => {
     
   const {data, listId} = props;
-  let object
+  let object;
   
   
 

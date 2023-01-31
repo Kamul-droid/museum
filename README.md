@@ -1,6 +1,11 @@
-# Getting Started with Create React App
+# Getting Started with Metropolitan Museum React App project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project fetch metropolitan museum database api
+# Installation
+
+You need first to install the dependencies included in the package.json with: 
+
+### `npm install` 
 
 ## Available Scripts
 

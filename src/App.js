@@ -28,9 +28,18 @@ function App() {
 
   const [searchValue, setSearch] = useState('');
   const [arts, setArts] = useState([]);
+  const [artQObjects, setArtQObjects] = useState([]);
 
-
-
+  const isInArray = ( array, data)=>{
+    let isInside =false;
+    array.forEach(element => {
+        
+        if (element.objectID === data.objectID) {
+            isInside = true;
+        } 
+    });
+    return isInside;
+}
 const reinitializeSearchValue = (arts)=>{
   if (arts.length !==0) {
     setSearch('');
@@ -38,14 +47,12 @@ const reinitializeSearchValue = (arts)=>{
 }
   const getArtObjectList = useCallback( (object)=>{
       setArts(object)
-      console.log('====================================');
-      console.log("in appp");
-      console.log('====================================');
+     
     },[setArts]);
 
   const updateSearch = useCallback( (object)=>{
       setSearch(object)
-     
+    
     },[]);
     
   useCallback(
@@ -58,12 +65,12 @@ const reinitializeSearchValue = (arts)=>{
 
   return (
     <>
-      <searchContext.Provider value={{searchValue,getArtObjectList, updateSearch}} >
+      <searchContext.Provider value={{searchValue,artQObjects,setArtQObjects,getArtObjectList, updateSearch,isInArray}} >
         <artsContext.Provider value={arts}>
 
     
           <Header></Header>
-          <Menu></Menu>
+          { currentPathName !=='advanced_research' &&<Menu></Menu>}
           { 
 
             (searchValue ==='' || canSeeDetails !=="true") && !objectId && <LandingPage></LandingPage>
@@ -71,7 +78,7 @@ const reinitializeSearchValue = (arts)=>{
           }
           {
            
-           (!objectId || searchValue !=='') && <Views searchData ={ searchValue}></Views>
+           (!objectId || searchValue !=='') && <Views searchData ={ searchValue} data = {arts}></Views>
            
           }
           

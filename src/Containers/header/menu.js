@@ -1,29 +1,116 @@
-import React, {  useCallback, useContext} from 'react';
+import React, {  useCallback, useContext, useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../img/logo.svg'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faSearch} from '@fortawesome/free-solid-svg-icons'
 import { searchContext } from '../../App';
+
+
 const Menu = () => {
-   const {searchValue, getArtObjectList, updateSearch} = useContext(searchContext);
+   const {searchValue,artQObjects,setArtQObjects, getArtObjectList, updateSearch,isInArray} = useContext(searchContext);
    
+  
+    const [objectsQId, setObjectsQId] = useState([]);
+    const [isQLoaded, setQLoaded] = useState(false);
     const search = <FontAwesomeIcon icon={faSearch}/>;
+    const  requestOptions={
+        method:'GET',
+        redirect:'follow',
+       
+       
+    };
+
+    
+    const getMuseumArtObjectIdWithQuery = 
+    async ( ) => {
+    
+        await fetch(`https://collectionapi.metmuseum.org/public/collection/v1/search?q=${searchValue}`,requestOptions)
+        .then(response => response.json())
+        .then( (result) => {
+            setObjectsQId(result["objectIDs"]); 
+             getMuseumArtQObject();
+                                                  
+        }).then(
+            
+            ()=>{
+                getArtObjectList(artQObjects);
+            }
+        )
+        .catch((error) => {
+            console.log('error', error)
+        })
+    }
+
+    const getMuseumArtQObject = 
+    async () => {
+             
+        if (objectsQId.length !==0) {
+            
+            objectsQId.forEach(id => {
+                
+                fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`,requestOptions)
+                    .then(response => response.json())
+                    .then((result)=>{
+                    
+                    let res = !isInArray(artQObjects, result);
+                    
+                    if (res) {
+                       
+                        
+                        setArtQObjects(artQObjects => [...artQObjects, result])
+                    
+                    }
+                    
+                    }).catch((error)=>{
+                        console.log('====================================');
+                        console.log("cant get an object with his id");
+                        console.log('====================================');
+                    })
+            });
+            
+            
+        }
    
+          
+            
+           
+    }
+    
+  
+
+
+
+
+
    
     const handleChange =  useCallback(  (e) => {
-        updateSearch(e.target.value);
-        console.log('================term====================');
-        console.log(searchValue);
-        console.log('====================================');
-    },[searchValue, updateSearch]);
+         updateSearch(e.target.value);
+
+        
+    },[]);
     
     
-    const handleSubmit = useCallback((e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
+        getArtObjectList([]);
+        getMuseumArtObjectIdWithQuery().catch(console.log("error k"))
         
-        updateSearch(searchValue);
         
-    },[searchValue, updateSearch]);
+        
+        //    const formData = document.getElementById('search');
+        //     updateSearch(formData.value);
+        
+    };
+    
+    useEffect(() => {
+        getMuseumArtObjectIdWithQuery().catch(console.log("error k"))
+             
+    }, []);
+
+
+    
+    
+ 
       
     return (
         <nav className="navbar navbar-expand-lg bg-light shadow-lg">
