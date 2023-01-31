@@ -1,11 +1,12 @@
 import { render, screen } from '@testing-library/react'
 import {BrowserRouter as Router} from "react-router-dom";
-import View from './view'
+import View from '../main/Pages/view'
+
+describe('Test view page', () => {
+   test('view  parent display', async () => {
 
 
-describe('Test view page', async() => {
-
-    await test('view display', async () => {
+     test('view display', async () => {
         render(
          <Router> 
             <View />
@@ -67,6 +68,7 @@ describe('Test view page', async() => {
          </Router>
         )
         const waitingText= screen.getByTestId('waiting-text')
-        expect(waitingView).toBeInTheDocument()
+        expect(waitingText).toBeInTheDocument()
      })
+   })
 })
