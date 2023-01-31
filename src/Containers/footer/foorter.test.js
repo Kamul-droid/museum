@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react'
 import {BrowserRouter as Router} from "react-router-dom";
 import Footer from './footer'
 
+describe('Test footer', () => {
 
     test('footer display', async () => {
         render(
@@ -103,3 +104,5 @@ import Footer from './footer'
         expect(partnerItem).toBeInTheDocument()
         expect(partnerItem.textContent).toBe('Partner with us')
      })
+    
+})
