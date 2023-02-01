@@ -1,11 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import { add } from 'lodash';
 import {BrowserRouter as Router} from "react-router-dom";
-<<<<<<< HEAD:src/Containers/test/header.test.js
 import Header from '../header/header'
-=======
-import Header from '../Containers/header/header'
->>>>>>> 66928cdd738b2c5b04d55de8fb91c74963826668:src/test/header.test.js
 
 
 
