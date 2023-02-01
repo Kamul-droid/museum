@@ -9,10 +9,10 @@ import LandingPage from './Containers/main/landingPage';
 import Footer from './Containers/footer/footer';
 // import Home from './Containers/main/Pages/home';
 import Views from './Containers/main/Pages/view';
-import React, { useCallback,useEffect ,useState } from 'react';
-import { Navigate, redirect, useLocation, useNavigate, useNavigation, useParams } from 'react-router-dom';
+import React, { useCallback,useState } from 'react';
+import { useLocation, useParams } from 'react-router-dom';
 import Description from './Containers/main/Pages/description';
-import NotFound from './Containers/main/Pages/notFound';
+import AdvancedSearch from './Containers/main/Pages/advancedSearch';
 const searchContext = React.createContext('');
 const artsContext = React.createContext([]);
 
@@ -29,6 +29,7 @@ function App() {
   const [searchValue, setSearch] = useState('');
   const [arts, setArts] = useState([]);
   const [artQObjects, setArtQObjects] = useState([]);
+  const [isQLoaded, setQLoaded] = useState(false);
 
   const isInArray = ( array, data)=>{
     let isInside =false;
@@ -40,54 +41,62 @@ function App() {
     });
     return isInside;
 }
-const reinitializeSearchValue = (arts)=>{
-  if (arts.length !==0) {
-    setSearch('');
-  }
-}
+// const reinitializeSearchValue = (arts)=>{
+//   if (arts.length !==0) {
+//     setSearch('');
+//   }
+// }
   const getArtObjectList = useCallback( (object)=>{
       setArts(object)
-     
-    },[setArts]);
+     console.log(arts,' arts g')
+    },[arts]);
 
   const updateSearch = useCallback( (object)=>{
       setSearch(object)
     
     },[]);
     
-  useCallback(
-    () => {
-      reinitializeSearchValue(arts);
+  const cleanSearchValue = useCallback(()=>
+   { 
+    if (artQObjects !==0) {
+        setSearch('');
+    }
     },
-    [arts],
+    [artQObjects]
   )
+  
+  
+  
   
 
   return (
     <>
-      <searchContext.Provider  value={{searchValue,artQObjects,setArtQObjects,getArtObjectList, updateSearch,isInArray}} >
+      <searchContext.Provider value={{searchValue,artQObjects,setArtQObjects,getArtObjectList, updateSearch,isInArray,cleanSearchValue,isQLoaded,setQLoaded }} >
         <artsContext.Provider value={arts}>
 
     
           <Header></Header>
-          { currentPathName !=='advanced_research' &&<Menu></Menu>}
+          { <Menu></Menu>}
           { 
 
-            (searchValue ==='' || canSeeDetails !=="true") && !objectId && <LandingPage></LandingPage>
+            (searchValue ==='' || canSeeDetails !=="true" )&& currentPathName !=='advanced_research' && !objectId && <LandingPage></LandingPage>
 
           }
           {
            
-           (!objectId || searchValue !=='') && <Views searchData ={ searchValue} data = {arts}></Views>
+           (!objectId || searchValue !=='') && currentPathName !=='advanced_research' && <Views searchData ={ searchValue} data = {arts}></Views>
            
           }
           
 
-           {
-            searchValue ==='' && canSeeDetails ==="true" && arts.length !==0 && <Description data = {arts} listId={objectId} ></Description>
-           }
+          {
+             canSeeDetails ==="true" && arts.length !==0 && <Description data = {arts} listId={objectId} ></Description>
+           } 
            {
             currentPathName ==='details' && canSeeDetails !=="true" && arts.length ===0 && <Description data = {arts} listId={objectId}  ></Description>
+           }
+           {
+            currentPathName ==='advanced_research'   && <AdvancedSearch ></AdvancedSearch>
            }
           
        

@@ -7,11 +7,11 @@ import { searchContext } from '../../App';
 
 
 const Menu = () => {
-   const {searchValue,artQObjects,setArtQObjects, getArtObjectList, updateSearch,isInArray} = useContext(searchContext);
+   const {searchValue,artQObjects,setArtQObjects, getArtObjectList, updateSearch,isInArray,cleanSearchValue,isQLoaded, setQLoaded} = useContext(searchContext);
    
   
     const [objectsQId, setObjectsQId] = useState([]);
-    const [isQLoaded, setQLoaded] = useState(false);
+    
     const search = <FontAwesomeIcon icon={faSearch}/>;
     const  requestOptions={
         method:'GET',
@@ -34,6 +34,7 @@ const Menu = () => {
             
             ()=>{
                 getArtObjectList(artQObjects);
+                setQLoaded(true);
             }
         )
         .catch((error) => {
@@ -92,14 +93,9 @@ const Menu = () => {
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        getArtObjectList([]);
-        getMuseumArtObjectIdWithQuery().catch(console.log("error k"))
+         getMuseumArtObjectIdWithQuery().catch(console.log("error k"))
         
-        
-        
-        //    const formData = document.getElementById('search');
-        //     updateSearch(formData.value);
-        
+        //  cleanSearchValue();    
     };
     
     useEffect(() => {

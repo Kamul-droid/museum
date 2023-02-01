@@ -1,13 +1,14 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import Header from '../../header/header';
-import Menu from '../../header/menu';
-import Footer from '../../footer/footer';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import '../../../css/research.css'
+import { searchContext } from '../../../App';
 
 
 import Card from './card';
 
 const AdvancedSearch = () => {
+
+  const {searchValue,artQObjects,setArtQObjects,getArtObjectList, updateSearch,isInArray} = useContext(searchContext);
+   
   const departments = [];
   
 
@@ -30,19 +31,9 @@ const AdvancedSearch = () => {
     medium:'',
     isSubmit:'false',
   });
-console.log(searchObject,'hhhdebut');
+
   let count = 0;
-  const isInArray = ( array, data)=>{
-    let isInside =false;
-    array.forEach(element => {
-        
-        if (element.objectID === data.objectID) {
-            isInside = true;
-        } 
-    });
-    return isInside;
-  }
-  
+ 
   const launchSearch = (formData)=>{
     if (formData.isSubmit) {
       let value = {q:formData.q,departmentId:formData.departmentId,geoLocation:formData.geoLocation,hasImages:formData.hasImages,isHighlight:formData.highlight,tags:formData.tags,medium:formData.medium};
@@ -57,7 +48,8 @@ console.log(searchObject,'hhhdebut');
         }
       }
      }
-    
+    //  formData.isSubmit =false;
+    // setFormData(formData.isSubmit:false)
      return queryString.substring(0,queryString.length-1);
   
      
@@ -91,23 +83,21 @@ console.log(searchObject,'hhhdebut');
         })
       });
     },
+    [idOfRequestObject, isInArray, requestOptions, searchObject],
     [idOfRequestObject]
   )
 
   const getMuseumArtObjectId = 
     async ( query) => {
-      
-    
+        
       await fetch(`https://collectionapi.metmuseum.org/public/collection/v1/search?${query}`,requestOptions)
       .then(response => response.json())
       .then( (result) => {
        
         setIdOfRequestObject(result["objectIDs"]);
         getMuseumObject()
-        
-          
+                  
       })
-
       .catch((error) => {
           console.log('error', error)
       })
@@ -131,8 +121,7 @@ console.log(searchObject,'hhhdebut');
     setFormData({ ...formData, [name]: value });
     let res =launchSearch(formData);
     setMQuery(res);
-    console.log(query, 'quer');
-    console.log(res, 'query');
+    
     getMuseumArtObjectId(res);
   }
 
@@ -163,11 +152,10 @@ console.log(searchObject,'hhhdebut');
 },
   []
   )                // eslint-disable-next-line no-undef
-const getData = async()=>{
+  const getData = async()=>{
   departmentsId.map(data => departments.push({dep :data["displayName"] , id:data["departmentId"]}))
-  
-  // console.log(departments)
-}
+ 
+  }
 
 
 
@@ -175,7 +163,7 @@ const getData = async()=>{
 
     getdepartmentsId()
     getData()
-
+    getArtObjectList(searchObject)
     
 
 
@@ -183,9 +171,8 @@ const getData = async()=>{
 
   <>
   
-    <Header></Header>
-    <Menu></Menu> 
-    <div data-testid ='advanced-search' className="advanced-search">
+    
+    <div className="s008">
       <form onSubmit={handleSubmit}>
         <div className="inner-form">
           <div className="basic-search">
@@ -245,24 +232,29 @@ const getData = async()=>{
       </form>
       
     </div>
-    <div className='row'>
-    {searchObject && 
-        searchObject.map(data => 
+    <section className="section-padding" id="section_3">
+      <div className="container">
 
-        <Card  key= {data["objectID"]} id={count++} img={data["primaryImage"]} title ={data["title"]} credit={data["creditLine"]}></Card>
+        <div className='row'>
+          {searchObject && 
+              searchObject.map(data => 
 
-        )
-      
-      }
-      {searchObject.length===0 &&  idOfRequestObject.length !==0 &&
-       
-       <p className='text-center h2'> Not found </p>
-      
-      }
+              <Card  key= {data["objectID"]} id={count++} img={data["primaryImage"]} title ={data["title"]} credit={data["creditLine"]} object = {data}></Card>
 
-    </div>
-    <Footer></Footer>
- 
+              )
+            
+            }
+            {searchObject.length===0 &&  idOfRequestObject.length !==0 &&
+            
+            <p className='text-center h2'> Not found </p>
+            
+            }
+
+        </div>
+        
+      </div>
+    
+    </section>
         </>
         
     );

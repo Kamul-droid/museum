@@ -1,11 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './css/App.css';
-import App from './App';
-import Advanced from './Containers/main/Pages/advancedSearch';
-import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import NotFound from './Containers/main/Pages/notFound';
+import reportWebVitals from './reportWebVitals';
+
+import './css/App.css';
 import 'jquery';
 import 'bootstrap';
 import './css/js/jquery.sticky';
@@ -13,15 +11,20 @@ import './css/js/click-scroll';
 import './css/js/counter';
 import './css/js/custom';
 
+import App from './App';
+
+import NotFound from './Containers/main/Pages/notFound';
+
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     
-  
+    
       <BrowserRouter>
         <Routes>
         <Route path='/' element= {<App/>}/>
-        <Route path='/advanced_research' element= {<Advanced/>}/>
+        <Route path='/advanced_research' element= {<App/>}/>
         <Route path='/details/:id/:d/' element={<App/>}/>
 
         <Route path='*' element={<NotFound/>}> </Route>

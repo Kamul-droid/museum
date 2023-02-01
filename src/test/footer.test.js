@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import {BrowserRouter as Router} from "react-router-dom";
-import Footer from './footer'
+import Footer from '../Containers/footer/footer'
 
 describe('Test footer', () => {
 
