@@ -142,7 +142,7 @@ const Views = (props) => {
                         searchData==='' && isLoaded && 
                         uniqueArtObject.map(data => 
 
-                            <Card  key= {data["objectID"]} id={count++} img={data["primaryImage"]} title ={data["title"]} credit={data["creditLine"]}></Card>
+                            <Card  key= {data["objectID"]} id={count++} img={data["primaryImage"]} title ={data["title"]} credit={data["creditLine"]} alt={data["title"]}></Card>
 
                         )
        
@@ -150,7 +150,7 @@ const Views = (props) => {
                     {
                         searchData==='' && isPLoaded && artPObjects.map(data => 
 
-                            <Card  key= {data["objectID"]} id={count++} img={data["primaryImage"]} title ={data["title"]} credit={data["creditLine"]}object = {data}></Card>
+                            <Card  key= {data["objectID"]} id={count++} img={data["primaryImage"]} title ={data["title"]} credit={data["creditLine"]} alt={data["title"]} object = {data}></Card>
 
                             )
                     }
@@ -160,7 +160,7 @@ const Views = (props) => {
                         isQLoaded && uniqueQu.length !== 0 && 
                         uniqueQu.map(data => 
 
-                            <Card  key= {data["objectID"]} id={count++} img={data["primaryImage"]} title ={data["title"]} credit={data["creditLine"]} object = {data}></Card>
+                            <Card  key= {data["objectID"]} id={count++} img={data["primaryImage"]} title ={data["title"]} credit={data["creditLine"]} alt={data["title"]} object = {data}></Card>
 
                         )
                        

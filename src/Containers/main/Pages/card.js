@@ -3,12 +3,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Card = (props) => {
-    const {img, title, credit, id, object} = props;
+    const {img, title, credit, id, object,alt} = props;
 
     return (
         <div data-testid = 'popular-object' className="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
             <div className="custom-block-wrap">
-                <img data-testid = 'image-object' src={img} className="custom-block-image img-fluid" alt="" width={150} height={150}  />
+                <img data-testid = 'image-object' src={img} className="custom-block-image img-fluid" alt={alt} width={150} height={150}  />
 
                 <div className="custom-block">
                     <div data-testid = 'title-object' className="custom-block-body">

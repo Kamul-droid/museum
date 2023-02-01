@@ -1,10 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import {BrowserRouter as Router} from "react-router-dom";
-<<<<<<< HEAD:src/Containers/test/card.test.js
-import Card from '../main/Pages/card'
-=======
 import Card from '../Containers/main/Pages/card'
->>>>>>> 66928cdd738b2c5b04d55de8fb91c74963826668:src/test/card.test.js
 
 
 describe('Test card page', () => {

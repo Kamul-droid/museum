@@ -5,7 +5,7 @@ const Description = (props) => {
     
   const {data, listId} = props;
   let object;
-  console.log(data,'my datagg');
+  
   
 // 
   if (data ) {
@@ -47,7 +47,7 @@ const Description = (props) => {
                     <div className="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                         <div className="col mb-5">
                             <div className="card h-100">
-                                <img className="card-img-top" src={object.additionalImages[0]} alt="..." />
+                                <img className="card-img-top" src={object.additionalImages[0]} alt={object.title} />
                                 <div className="card-body p-4">
                                     <div className="text-center">
                                         <h5 className="fw-bolder"> Date: {object.objectDate}</h5>
@@ -58,31 +58,40 @@ const Description = (props) => {
                             </div>
                         </div>
                         
-                        
-                        <div className="col mb-5">
-                            <div className="card h-100">
-                                <img className="card-img-top" src={object.additionalImages[0]} alt="..." />
-                                <div className="card-body p-4">
-                                    <div className="text-center">
-                                    {}
-                                    {
-                                        object.tags !==null  && object.tags.length !==0 && <a className="navbar-brand"  href={object.tags[0].Wikidata_URL} target="_blank" rel="noreferrer" > Wikipedia </a>
-    
-                                    }
-                                    
-                                        <h5 className="fw-bolder">Popular Item</h5>
-                                        <div className="d-flex justify-content-center small text-warning mb-2">
-                                            <div className="bi-star-fill"></div>
-                                            <div className="bi-star-fill"></div>
-                                            <div className="bi-star-fill"></div>
-                                            <div className="bi-star-fill"></div>
-                                            <div className="bi-star-fill"></div>
+                        { 
+                            object.additionalImages &&  
+                            
+                            object.additionalImages.map(imgUrl =>
+                            
+                                <div className="col mb-5">
+                                    <div className="card h-100">
+                                        <img className="card-img-top" src={imgUrl} alt={object.title} />
+                                        <div className="card-body p-4">
+                                            <div className="text-center">
+                                            
+                                            {
+                                                object.tags !==null  && object.tags.length !==0 && <a className="navbar-brand"  href={object.tags[0].Wikidata_URL} target="_blank" rel="noreferrer" > Wikipedia </a>
+            
+                                            }
+                                            
+                                                <h5 className="fw-bolder">Popular Item</h5>
+                                                <div className="d-flex justify-content-center small text-warning mb-2">
+                                                    <div className="bi-star-fill"></div>
+                                                    <div className="bi-star-fill"></div>
+                                                    <div className="bi-star-fill"></div>
+                                                    <div className="bi-star-fill"></div>
+                                                    <div className="bi-star-fill"></div>
+                                                </div>
+                                            
+                                            </div>
                                         </div>
-                                       
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                            )
+                            
+                        }
+
+
                     </div>
                 </div>
             </section>

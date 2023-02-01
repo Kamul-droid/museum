@@ -48,7 +48,7 @@ function App() {
 // }
   const getArtObjectList = useCallback( (object)=>{
       setArts(object)
-     console.log(arts,' arts g')
+    
     },[arts]);
 
   const updateSearch = useCallback( (object)=>{

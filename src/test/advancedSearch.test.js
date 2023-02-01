@@ -1,10 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import {BrowserRouter as Router} from "react-router-dom";
-<<<<<<< HEAD:src/Containers/test/advancedSearch.test.js
-import AdvancedSearch from '../main/Pages/advancedSearch'
-=======
 import AdvancedSearch from '../Containers/main/Pages/advancedSearch'
->>>>>>> 66928cdd738b2c5b04d55de8fb91c74963826668:src/test/advancedSearch.test.js
 
 
 describe('Test Advanced search page', () => {

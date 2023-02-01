@@ -1,10 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import {BrowserRouter as Router} from "react-router-dom";
-<<<<<<< HEAD:src/Containers/test/view.test.js
-import View from '../main/Pages/view'
-=======
 import View from '../Containers/main/Pages/view'
->>>>>>> 66928cdd738b2c5b04d55de8fb91c74963826668:src/test/view.test.js
 
 describe('Test view page', () => {
    test('view  parent display', async () => {

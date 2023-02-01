@@ -1,10 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import {BrowserRouter as Router} from "react-router-dom";
-<<<<<<< HEAD:src/Containers/test/menu.test.js
-import Menu from '../header/menu'
-=======
 import Menu from '../Containers/header/menu'
->>>>>>> 66928cdd738b2c5b04d55de8fb91c74963826668:src/test/menu.test.js
 import logo from '../../img/logo.svg'
 
 
